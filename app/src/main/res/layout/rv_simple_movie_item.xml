@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.osh.apps.movies.listMovie.item.SimpleMovieItemView
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     android:id="@+id/movie_item"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:clickable="true"
+     android:focusable="true"
+     android:background="?android:attr/selectableItemBackground">
+
+
+     <include layout="@layout/rv_base_movie_item" />
+
+</com.osh.apps.movies.listMovie.item.SimpleMovieItemView>
