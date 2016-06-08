@@ -204,19 +204,56 @@ private OnItemLongClickListener itemLongClickListener;
 
     private class OnItemEventListener implements OnClickListener,OnLongClickListener
     {
+    private boolean hasClick;
+
+
+        public OnItemEventListener()
+        {
+        hasClick=false;
+        }
+
 
         @Override
         public void onClick(View itemView)
         {
+        boolean isFirstClick=false;
 
-        onItemClick(getChildAdapterPosition(itemView));
+        synchronized(this)
+            {
+            if(!hasClick)
+                {
+                isFirstClick=true;
+                hasClick=true;
+                }
+            }
+
+        if(!isFirstClick)
+            {
+            onItemClick(getChildAdapterPosition(itemView));
+            hasClick=false;
+            }
         }
 
 
         @Override
         public boolean onLongClick(View itemView)
         {
-        onItemLongClick(getChildAdapterPosition(itemView));
+        boolean isFirstClick=false;
+
+        synchronized(this)
+            {
+            if(!hasClick)
+                {
+                isFirstClick=true;
+                hasClick=true;
+                }
+            }
+
+        if(!isFirstClick)
+            {
+            onItemLongClick(getChildAdapterPosition(itemView));
+            hasClick=false;
+            }
 
         return true;
         }
