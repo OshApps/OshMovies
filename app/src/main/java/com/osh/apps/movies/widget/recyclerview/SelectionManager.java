@@ -1,6 +1,5 @@
-package com.osh.apps.movies.clickableRecyclerView;
+package com.osh.apps.movies.widget.recyclerview;
 
-import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -12,7 +11,7 @@ import android.view.MenuItem;
  */
 public class SelectionManager implements ActionMode.Callback
 {
-private ClickableRecyclerView.MultiChoiceModeListener multiChoiceModeListener;
+private CustomRecyclerView.MultiChoiceModeListener multiChoiceModeListener;
 private SparseBooleanArray selectedItems;
 private ActionMode mode;
 
@@ -26,13 +25,13 @@ private ActionMode mode;
     }
 
 
-    public void setMultiChoiceModeListener(ClickableRecyclerView.MultiChoiceModeListener multiChoiceModeListener)
+    public void setMultiChoiceModeListener(CustomRecyclerView.MultiChoiceModeListener multiChoiceModeListener)
     {
     this.multiChoiceModeListener = multiChoiceModeListener;
     }
 
 
-    public void onItemSelected(RecyclerView.ViewHolder viewHolder)
+    public void onItemSelected(CustomRecyclerView.ViewHolder viewHolder)
     {
     int itemPosition;
     boolean isItemSelected;
@@ -45,7 +44,7 @@ private ActionMode mode;
     }
 
 
-    public void setItemSelected(RecyclerView.ViewHolder viewHolder, int itemPosition, boolean isItemSelected)
+    public void setItemSelected(CustomRecyclerView.ViewHolder viewHolder, int itemPosition, boolean isItemSelected)
     {
 
     if(isItemSelected)
@@ -60,7 +59,7 @@ private ActionMode mode;
     }
 
 
-    public void onItemSelectedStateChanged(RecyclerView.ViewHolder viewHolder, int position, int viewType, boolean isSelected)
+    public void onItemSelectedStateChanged(CustomRecyclerView.ViewHolder viewHolder, int position, int viewType, boolean isSelected)
     {
     multiChoiceModeListener.onItemSelectedStateChanged(mode, viewHolder, position, viewType, isSelected);
 

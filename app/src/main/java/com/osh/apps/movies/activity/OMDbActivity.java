@@ -26,12 +26,12 @@ import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutD
 import com.osh.apps.movies.R;
 import com.osh.apps.movies.app.AppData;
 import com.osh.apps.movies.appDB.AppDB;
-import com.osh.apps.movies.clickableRecyclerView.ClickableRecyclerView;
 import com.osh.apps.movies.listMovie.ListMovieAdapter;
 import com.osh.apps.movies.movieInfo.MovieInfoBinder;
 import com.osh.apps.movies.movieInfo.SimpleMovieInfo;
-import com.osh.apps.movies.network.connection.JsonConnection;
 import com.osh.apps.movies.network.SearchRequest;
+import com.osh.apps.movies.network.connection.JsonConnection;
+import com.osh.apps.movies.widget.recyclerview.CustomRecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,10 +40,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class OMDbActivity extends AppCompatActivity implements  ClickableRecyclerView.OnItemClickListener
+public class OMDbActivity extends AppCompatActivity implements  CustomRecyclerView.OnItemClickListener
 {
 private SwipyRefreshLayout swipyRefreshLayout;
-private ClickableRecyclerView recyclerView;
+private CustomRecyclerView recyclerView;
 private int lastItemClickedPosition;
 private SearchRequest searchRequest;
 private WebSearchTask searchTask;
@@ -118,7 +118,7 @@ private AppDB database;
             }
         });
 
-    recyclerView = (ClickableRecyclerView) findViewById(R.id.recyclerView);
+    recyclerView = (CustomRecyclerView) findViewById(R.id.recyclerView);
 
     adapter=new ListMovieAdapter(this,R.layout.rv_search_movie_item);
 

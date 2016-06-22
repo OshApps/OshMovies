@@ -21,16 +21,16 @@ import com.osh.apps.movies.activity.EditMovieActivity;
 import com.osh.apps.movies.activity.MovieInfoActivity;
 import com.osh.apps.movies.activity.OMDbActivity;
 import com.osh.apps.movies.app.AppData;
-import com.osh.apps.movies.clickableRecyclerView.ClickableRecyclerView;
 import com.osh.apps.movies.appDB.AppDB;
 import com.osh.apps.movies.dialog.SimpleAlertDialog;
 import com.osh.apps.movies.listMovie.ListMovieAdapter;
 import com.osh.apps.movies.movieInfo.SimpleMovieInfo;
+import com.osh.apps.movies.widget.recyclerview.CustomRecyclerView;
 
 
-public class FavoritesActivity extends AppCompatActivity implements ClickableRecyclerView.OnItemClickListener, ClickableRecyclerView.OnItemLongClickListener
+public class FavoritesActivity extends AppCompatActivity implements CustomRecyclerView.OnItemClickListener, CustomRecyclerView.OnItemLongClickListener
 {
-private ClickableRecyclerView recyclerView;
+private CustomRecyclerView recyclerView;
 private ListMovieAdapter adapter;
 private AppDB database;
 private PopupMenu popupMenu;
@@ -89,7 +89,7 @@ private PopupMenu popupMenu;
             }
         });
 
-    recyclerView = (ClickableRecyclerView) findViewById(R.id.recyclerView);
+    recyclerView = (CustomRecyclerView) findViewById(R.id.recyclerView);
 
     adapter=new ListMovieAdapter(this, R.layout.rv_simple_movie_item);
 
@@ -219,7 +219,7 @@ private PopupMenu popupMenu;
                 @Override
                 public void onDismiss(PopupMenu menu)
                 {
-                 popupMenu=null;
+                popupMenu=null;
                 }
             });
 

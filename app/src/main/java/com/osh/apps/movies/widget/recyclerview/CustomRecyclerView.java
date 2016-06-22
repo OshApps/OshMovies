@@ -1,4 +1,4 @@
-package com.osh.apps.movies.clickableRecyclerView;
+package com.osh.apps.movies.widget.recyclerview;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +11,7 @@ import android.view.View;
 /**
  * Created by oshri-n on 11/05/2016.
  */
-public class ClickableRecyclerView extends RecyclerView implements RecyclerView.OnChildAttachStateChangeListener
+public class CustomRecyclerView extends RecyclerView implements RecyclerView.OnChildAttachStateChangeListener
 {
 private SelectionManager selectionManager;
 private OnItemEventListener itemEventListener;
@@ -19,7 +19,7 @@ private OnItemClickListener itemClickListener;
 private OnItemLongClickListener itemLongClickListener;
 
 
-	public ClickableRecyclerView(Context context, AttributeSet attrs)
+	public CustomRecyclerView(Context context, AttributeSet attrs)
 	{
 	super(context, attrs);
 
@@ -43,11 +43,16 @@ private OnItemLongClickListener itemLongClickListener;
 
 
     @Override
-    public void onChildViewDetachedFromWindow(View view){}
+    public void onChildViewDetachedFromWindow(View view)
+    {
+    view.setOnClickListener(null);
+
+    view.setOnLongClickListener(null);
+    }
 
 
     /**
-     * this method will return null when the position is out of view for more information look at {@link RecyclerView#findViewHolderForAdapterPosition(int)}
+     * this method will return null when the position is out of view for more information look at {@link CustomRecyclerView#findViewHolderForAdapterPosition(int)}
      *
      *
      */
@@ -227,7 +232,7 @@ private OnItemLongClickListener itemLongClickListener;
                 }
             }
 
-        if(!isFirstClick)
+        if(isFirstClick)
             {
             onItemClick(getChildAdapterPosition(itemView));
             hasClick=false;
@@ -249,7 +254,7 @@ private OnItemLongClickListener itemLongClickListener;
                 }
             }
 
-        if(!isFirstClick)
+        if(isFirstClick)
             {
             onItemLongClick(getChildAdapterPosition(itemView));
             hasClick=false;

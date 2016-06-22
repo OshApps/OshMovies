@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         app:srl_direction="bottom">
 
-        <com.osh.apps.movies.clickableRecyclerView.ClickableRecyclerView
+        <com.osh.apps.movies.widget.recyclerview.CustomRecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
