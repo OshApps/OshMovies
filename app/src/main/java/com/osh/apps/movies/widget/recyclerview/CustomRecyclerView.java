@@ -87,7 +87,7 @@ private OnItemLongClickListener itemLongClickListener;
 	return selectionManager.getSelectedItemPositions();
 	}
 
-    
+
 	private void onItemClick(final int itemPosition)
 	{
 
@@ -209,33 +209,25 @@ private OnItemLongClickListener itemLongClickListener;
 
     private class OnItemEventListener implements OnClickListener,OnLongClickListener
     {
-    private boolean hasClick;
+    private static final long CLICK_LOCK_TIME=500;
+
+    private long lastClickTime;
 
 
         public OnItemEventListener()
         {
-        hasClick=false;
+        lastClickTime=0;
         }
 
 
         @Override
         public void onClick(View itemView)
         {
-        boolean isFirstClick=false;
 
-        synchronized(this)
+        if(!isClickLocked())
             {
-            if(!hasClick)
-                {
-                isFirstClick=true;
-                hasClick=true;
-                }
-            }
-
-        if(isFirstClick)
-            {
+            lastClickTime=System.currentTimeMillis();
             onItemClick(getChildAdapterPosition(itemView));
-            hasClick=false;
             }
         }
 
@@ -243,25 +235,22 @@ private OnItemLongClickListener itemLongClickListener;
         @Override
         public boolean onLongClick(View itemView)
         {
-        boolean isFirstClick=false;
 
-        synchronized(this)
+        if(!isClickLocked())
             {
-            if(!hasClick)
-                {
-                isFirstClick=true;
-                hasClick=true;
-                }
-            }
-
-        if(isFirstClick)
-            {
+            lastClickTime=System.currentTimeMillis();
             onItemLongClick(getChildAdapterPosition(itemView));
-            hasClick=false;
             }
 
         return true;
         }
+
+
+        private boolean isClickLocked()
+        {
+        return  (System.currentTimeMillis() - lastClickTime ) <= CLICK_LOCK_TIME;
+        }
+
     }
 
 }

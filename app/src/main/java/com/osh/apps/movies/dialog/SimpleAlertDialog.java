@@ -15,7 +15,7 @@ public final class SimpleAlertDialog
 
     public static void createAlertDialog(Context context, String title, String msg, String positiveText, String negativeText, final AlertDialogListener alertDialogListener)
     {
-    DialogInterface.OnClickListener clickListener;
+    DialogInterface.OnClickListener clickListener=null;
     AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
 
     if(title!=null)
@@ -28,25 +28,27 @@ public final class SimpleAlertDialog
         dialogBuilder.setMessage(msg);
         }
 
-    clickListener=new DialogInterface.OnClickListener()
+    if(alertDialogListener!=null)
         {
-            @Override
-            public void onClick(DialogInterface dialog, int which)
+        clickListener=new DialogInterface.OnClickListener()
             {
-                switch(which)
+                @Override
+                public void onClick(DialogInterface dialog, int which)
                 {
-                case DialogInterface.BUTTON_POSITIVE:
-                    alertDialogListener.onPositive(dialog);
-                    break;
+                    switch(which)
+                    {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        alertDialogListener.onPositive(dialog);
+                        break;
 
-                case DialogInterface.BUTTON_NEGATIVE:
-                    alertDialogListener.onNegative(dialog);
-                    break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        alertDialogListener.onNegative(dialog);
+                        break;
 
+                    }
                 }
-            }
-        };
-
+            };
+        }
 
     dialogBuilder.setCancelable(true);
 
